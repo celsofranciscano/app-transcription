@@ -33,8 +33,8 @@ function App() {
 
   return (
     <>
-      <main className="px-4 md:px-12">
         <LogoTalking />
+      <main className="px-4 md:px-12 pt-16">
 
         <section className=" h-screen  ">
           <textarea
