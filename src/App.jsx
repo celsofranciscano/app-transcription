@@ -39,7 +39,7 @@ function App() {
         <section className=" h-screen  ">
           <textarea
              ref={textareaRef}
-            className="dark:bg-gray-950 bg-gray-200 rounded-md w-full border  dark:placeholder-gray-600 border-gray-600 p-8 focus:outline-none resize-none h-[70%]"
+            className="dark:bg-gray-950 bg-gray-200 rounded-md w-full border  dark:placeholder-gray-600 border-gray-600 p-8 focus:outline-none resize-none h-[64%] md:h-[70%]"
             placeholder="Comenzar a hablar..."
             value={text}
             onChange={onChange}
