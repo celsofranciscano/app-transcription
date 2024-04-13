@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+*{
+  scrollbar-width: thin;
+
+  
+}
+
+
+.animationTalking {
+   
+  animation: animationTalking 0ms -600ms linear infinite alternate;
+
+}
+
+@keyframes animationTalking {
+0% {
+   opacity: .35;
+    height: 3px; 
+}
+100% {
+    opacity: 1;       
+    height: 30px;        
+}
+}
+
+.animationTalking:nth-child(1)  { left: 1px; animation-duration: 474ms; }
+.animationTalking:nth-child(2)  { left: 15px; animation-duration: 433ms; }
+.animationTalking:nth-child(3)  { left: 29px; animation-duration: 407ms; }
+.animationTalking:nth-child(4)  { left: 43px; animation-duration: 458ms; }
