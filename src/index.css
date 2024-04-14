@@ -7,12 +7,12 @@
   
 }
 
-
+/* 
 .animationTalking {
    
   animation: animationTalking 0ms -600ms linear infinite alternate;
 
-}
+} */
 
 @keyframes animationTalking {
 0% {

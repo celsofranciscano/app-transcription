@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 function Options({ setText, text }) {
   const [isRecording, setRecording] = useState(false);
   const [reconocimientoVoz, setReconocimientoVoz] = useState(null);
+  const [animation, setAnimation] = useState(false);
 
   useEffect(() => {
     // Verificar si el navegador soporta la API de Reconocimiento de Voz
@@ -17,23 +18,24 @@ function Options({ setText, text }) {
 
       // Eventos
       recognition.onaudiostart = function (event) {
-        console.log("Se ha comenzado a capturar audio");
+        // console.log("Se ha comenzado a capturar audio");
       };
 
       recognition.onaudioend = function (event) {
-        console.log("Se ha terminado de capturar audio");
+        // console.log("Se ha terminado de capturar audio");
       };
 
       recognition.onend = function (event) {
-        console.log("Se ha desconectado el servicio de reconocimiento de voz");
+        setAnimation(false);
+        // console.log("Se ha desconectado el servicio de reconocimiento de voz");
       };
 
       recognition.onerror = function (event) {
-        console.error("Error de reconocimiento de voz:", event.error);
+        // console.error("Error de reconocimiento de voz:", event.error);
       };
 
       recognition.onnomatch = function (event) {
-        console.log("No se encontraron coincidencias significativas");
+        // console.log("No se encontraron coincidencias significativas");
       };
 
       // DESDE AQUI SE MANDA LA TRANSCRIPCION DEL AUDIO
@@ -45,28 +47,30 @@ function Options({ setText, text }) {
       };
 
       recognition.onsoundstart = function (event) {
-        console.log("Se ha detectado un sonido");
+        // console.log("Se ha detectado un sonido");
       };
 
       recognition.onsoundend = function (event) {
-        console.log("Se ha dejado de detectar cualquier sonido");
+        // console.log("Se ha dejado de detectar cualquier sonido");
       };
 
       recognition.onspeechstart = function (event) {
-        console.log("Se ha detectado inicio de discurso");
+        // console.log("Se ha detectado inicio de discurso");
       };
 
       recognition.onspeechend = function (event) {
-        console.log("Se ha detectado fin de discurso");
+        // console.log("Se ha detectado fin de discurso");
       };
 
       recognition.onstart = function (event) {
-        console.log("Se ha iniciado el reconocimiento de voz");
+        setAnimation(true);
+        // console.log("Se ha iniciado el reconocimiento de voz");
       };
       // recognition.abort(); // Detener el reconocimiento de voz actual
       // recognition.stop(); // Detener el reconocimiento de voz
       setReconocimientoVoz(recognition);
     } else {
+      alert("Su navegador no soporta el Reconocimiento de voz.");
       console.error("El navegador no soporta la API de Reconocimiento de Voz.");
     }
   }, []);
@@ -101,7 +105,7 @@ function Options({ setText, text }) {
   }
 
   return (
-    <div className=" h-24 bg-white dark:bg-gray-900 text-white  fixed bottom-0 w-full flex items-center justify-center">
+    <div className=" h-24 border-t border-gray-500 text-white  fixed bottom-0 w-full flex items-center justify-center">
       <div className=" flex gap-8">
         <button onClick={clear} className="">
           <svg
@@ -118,19 +122,18 @@ function Options({ setText, text }) {
             />
           </svg>
         </button>
-        <button
-          onClick={clickMicrophone}
-          className="bg-blue-600 rounded-full p-4 hover:scale-95 active:bg-blue-700"
-        >
-          <svg
-            className="size-8"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 -960 960 960"
-            fill="currentColor"
-          >
-            <path d="M480-400q-50 0-85-35t-35-85v-240q0-50 35-85t85-35q50 0 85 35t35 85v240q0 50-35 85t-85 35Zm0-240Zm-40 480v-83q-92-13-157.5-78T203-479q-2-17 9-29t28-12q17 0 28.5 11.5T284-480q14 70 69.5 115T480-320q72 0 127-45.5T676-480q4-17 15.5-28.5T720-520q17 0 28 12t9 29q-14 91-79 157t-158 79v83q0 17-11.5 28.5T480-120q-17 0-28.5-11.5T440-160Zm40-320q17 0 28.5-11.5T520-520v-240q0-17-11.5-28.5T480-800q-17 0-28.5 11.5T440-760v240q0 17 11.5 28.5T480-480Z" />
-          </svg>
+
+        <button  onClick={clickMicrophone}
+         class="relative flex hover:scale-95">
+          <span class={`${animation?'animate-ping':''} absolute inline-flex size-16 rounded-full bg-blue-500 opacity-30`}></span>
+          <span class="relative inline-flex rounded-full size-16 bg-blue-500">
+      <img className="rounded-full size-16" src="/icon-192x192.png" alt="" />
+         
+          </span>
         </button>
+
+      
+
         <button className=" rounded-full ">
           <span id="copy" onClick={copied}>
             <svg
@@ -147,9 +150,8 @@ function Options({ setText, text }) {
               />
             </svg>
           </span>
-          <span className="hidden"    id="copied">
+          <span className="hidden" id="copied">
             <svg
-           
               className="w-6 h-6  text-gray-800 dark:text-white"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
